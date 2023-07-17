@@ -29,5 +29,11 @@ public class ProductController {
 		
 		return repository.save(product);
 	}
+	
+	@GetMapping("/testApi")
+	public String testApi () {
+		
+		return "testing api successful";
+	}
 
 }
