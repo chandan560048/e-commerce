@@ -10,29 +10,32 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.amazone.demo.entity.ProductEntity;
 import com.amazone.demo.repository.ProductRepository;
+import com.amazone.demo.service.ProductService;
 
 @RestController
 public class ProductController {
-	
+
 	@Autowired
-	private ProductRepository repository ;
-	
+	private ProductRepository repository;
+
+	@Autowired
+	private ProductService service;
+
 	@GetMapping("/products")
 	public List<ProductEntity> getAllProduct() {
-		
-		return repository.findAll();
+
+		return service.getAllProducts();
 	}
-	
+
 	@PostMapping("/addProduct")
 	public ProductEntity addProducts(@RequestBody ProductEntity product) {
-		
-		
-		return repository.save(product);
+
+		return service.addProducts(product);
 	}
-	
+
 	@GetMapping("/testApi")
-	public String testApi () {
-		
+	public String testApi() {
+
 		return "testing api successful";
 	}
 
