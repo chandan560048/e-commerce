@@ -3,40 +3,58 @@ package com.amazone.demo.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.amazone.demo.entity.ProductCategory;
 import com.amazone.demo.entity.ProductEntity;
+import com.amazone.demo.repository.ProductCategoryRepository;
 import com.amazone.demo.repository.ProductRepository;
-import com.amazone.demo.service.ProductService;
+import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/api/products")
 public class ProductController {
 
-	@Autowired
-	private ProductRepository repository;
+	private final ProductCategoryRepository categoryRepository;
+	private final ProductRepository productRepository;
 
 	@Autowired
-	private ProductService service;
-
-	@GetMapping("/products")
-	public List<ProductEntity> getAllProduct() {
-
-		return service.getAllProducts();
+	public ProductController(ProductCategoryRepository categoryRepository, ProductRepository productRepository) {
+		this.categoryRepository = categoryRepository;
+		this.productRepository = productRepository;
 	}
 
-	@PostMapping("/addProduct")
-	public ProductEntity addProducts(@RequestBody ProductEntity product) {
-
-		return service.addProducts(product);
+	// Endpoint to save a new product
+	@PostMapping
+	// @ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<ProductEntity> saveProduct(@Valid @RequestBody ProductEntity product) {
+		ProductEntity savedProduct = productRepository.save(product);
+		return ResponseEntity.ok(savedProduct);
 	}
 
-	@GetMapping("/testApi")
-	public String testApi() {
+	// Endpoint to get all products
+	@GetMapping
+	public ResponseEntity<Iterable<ProductEntity>> getAllProducts() {
+		Iterable<ProductEntity> products = productRepository.findAll();
+		return ResponseEntity.ok(products);
+	}
 
-		return "testing api successful";
+	@GetMapping("/by-category/{categoryName}")
+	public ResponseEntity<List<ProductEntity>> findProductsByCategory(@PathVariable String categoryName) {
+		ProductCategory category = categoryRepository.findByCategoryName(categoryName);
+
+		if (category == null) {
+			return ResponseEntity.notFound().build();
+		}
+
+		List<ProductEntity> products = category.getProducts();
+		return ResponseEntity.ok(products);
 	}
 
 }
