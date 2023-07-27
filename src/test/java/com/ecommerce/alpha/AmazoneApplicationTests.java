@@ -1,10 +1,10 @@
-package com.amazone.demo;
+package com.ecommerce.alpha;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class AmazoneApplicationTests {
+class EcommerceAlphaTests {
 
 	@Test
 	void contextLoads() {

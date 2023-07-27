@@ -1,4 +1,4 @@
-package com.amazone.demo.controller;
+package com.ecommerce.alpha.controller;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.amazone.demo.entity.ProductEntity;
-import com.amazone.demo.repository.ProductRepository;
-import com.amazone.demo.service.ProductService;
+import com.ecommerce.alpha.entity.ProductEntity;
+import com.ecommerce.alpha.repository.ProductRepository;
+import com.ecommerce.alpha.service.ProductService;
 
 @RestController
 public class ProductController {
