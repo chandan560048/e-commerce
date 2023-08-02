@@ -19,8 +19,7 @@ public class OpenApiConfig {
                         .version("1.0")
                         .license(new License().name("Apache 2.0").url("http://www.apache.org/licenses/LICENSE-2.0")))
                 .externalDocs(new ExternalDocumentation()
-                        .description("Ranga Karanam, in28minutes@gmail.com")
-                        .url("http://www.in28minutes.com"));
+                        .description("PRAVEEN MAURYA, praveen110195@gmail.com"));
     }
 
 }

@@ -1,14 +1,10 @@
 package com.ecommerce.alpha.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -35,21 +31,24 @@ public class ProductEntity {
 	@Column
 	private double price;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonIgnore
-    private ProductCategory productCategoryId;
+	@Column(name="category_id")
+	private Long categoryId;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JsonIgnore
+//    private ProductCategory productCategoryId;
 
 	public ProductEntity() {
 		super();
 	}
 
-	public ProductEntity(Long id, String name, String description, double price, ProductCategory productCategoryId) {
+	public ProductEntity(Long id, String name, String description, double price, Long categoryId) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.price = price;
-		this.productCategoryId = productCategoryId;
+		this.categoryId = categoryId;
 	}
 
 	public Long getId() {
@@ -84,13 +83,21 @@ public class ProductEntity {
 		this.price = price;
 	}
 
-	public ProductCategory getProductCategoryId() {
-		return productCategoryId;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-   public void setProductCategoryId(ProductCategory productCategoryId) {
-		this.productCategoryId = productCategoryId;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
+
+//	public ProductCategory getProductCategoryId() {
+//		return productCategoryId;
+//	}
+//
+//   public void setProductCategoryId(ProductCategory productCategoryId) {
+//		this.productCategoryId = productCategoryId;
+//	}
 
 	
 }

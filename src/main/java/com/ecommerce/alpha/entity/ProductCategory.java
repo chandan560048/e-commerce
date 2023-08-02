@@ -1,16 +1,12 @@
 package com.ecommerce.alpha.entity;
 
 import java.io.Serializable;
-import java.util.List;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -32,10 +28,10 @@ public class ProductCategory implements Serializable{
 	@Column
 	private String categoryName;
 	
-	@Column
-	@OneToMany(targetEntity=ProductEntity.class, cascade=CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "product_category_id", referencedColumnName = "id")
-	private List<ProductEntity> product;
+//	@Column
+//	@OneToMany(targetEntity=ProductEntity.class, cascade=CascadeType.ALL, orphanRemoval = true)
+//	@JoinColumn(name = "product_category_id", referencedColumnName = "id")
+//	private List<ProductEntity> product;
 
 	public Long getId() {
 		return id;
@@ -45,13 +41,13 @@ public class ProductCategory implements Serializable{
 		this.id = id;
 	}
 
-	public List<ProductEntity> getProduct() {
-		return product;
-	}
-
-	public void setProduct(List<ProductEntity> product) {
-		this.product = product;
-	}
+//	public List<ProductEntity> getProduct() {
+//		return product;
+//	}
+//
+//	public void setProduct(List<ProductEntity> product) {
+//		this.product = product;
+//	}
 
 	public String getCategoryName() {
 		return categoryName;

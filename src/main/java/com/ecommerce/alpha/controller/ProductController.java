@@ -3,40 +3,32 @@ package com.ecommerce.alpha.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ecommerce.alpha.entity.ProductEntity;
-import com.ecommerce.alpha.repository.ProductRepository;
+import com.ecommerce.alpha.dtos.ProductInputDto;
+import com.ecommerce.alpha.dtos.ProductOutputDto;
 import com.ecommerce.alpha.service.ProductService;
 
 @RestController
 public class ProductController {
 
 	@Autowired
-	private ProductRepository repository;
-
-	@Autowired
 	private ProductService service;
 
 	@GetMapping("/products")
-	public List<ProductEntity> getAllProduct() {
-
-		return service.getAllProducts();
+	public ResponseEntity<List<ProductOutputDto>> getAllProduct() {
+		return new ResponseEntity<List<ProductOutputDto>>(service.getAllProducts(), HttpStatus.OK);
 	}
 
 	@PostMapping("/addProduct")
-	public ProductEntity addProducts(@RequestBody ProductEntity product) {
-
-		return service.addProducts(product);
-	}
-
-	@GetMapping("/testApi")
-	public String testApi() {
-
-		return "testing api successful";
+	public ResponseEntity<ProductOutputDto> addProducts(@RequestBody ProductInputDto product, @RequestParam String categoryName) {
+		return new ResponseEntity<ProductOutputDto>(service.addProducts(product, categoryName), HttpStatus.OK);
 	}
 
 }

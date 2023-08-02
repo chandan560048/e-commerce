@@ -13,16 +13,15 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 version = "V12.0.12",
                 title = "Awesome Resource API",
                 contact = @Contact(
-                        name = "Ranga Karanam",
-                        email = "ranga.karanam@in28minutes.com",
-                        url = "http://www.in28minutes.com"
+                        name = "PRAVEEN MAURYA",
+                        email = "praveen110195@gmail.com"
                 ),
                 license = @License(
                         name = "Apache 2.0",
                         url = "http://www.apache.org/licenses/LICENSE-2.0"
                 )
-        ),
-        servers = {@Server(url = "http://in28minutes.com")}
+        )
+//        servers = {@Server(url = "http://in28minutes.com")}
 )
 public interface ApiDocumentationConfig {
 
