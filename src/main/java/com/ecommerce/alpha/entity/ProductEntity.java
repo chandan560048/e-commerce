@@ -1,5 +1,7 @@
 package com.ecommerce.alpha.entity;
 
+import java.util.Objects;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,21 +36,11 @@ public class ProductEntity {
 	@Column(name="category_id")
 	private Long categoryId;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JsonIgnore
-//    private ProductCategory productCategoryId;
+	@Column
+	private String productImageUrl;
 
 	public ProductEntity() {
 		super();
-	}
-
-	public ProductEntity(Long id, String name, String description, double price, Long categoryId) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.price = price;
-		this.categoryId = categoryId;
 	}
 
 	public Long getId() {
@@ -91,13 +83,50 @@ public class ProductEntity {
 		this.categoryId = categoryId;
 	}
 
-//	public ProductCategory getProductCategoryId() {
-//		return productCategoryId;
-//	}
-//
-//   public void setProductCategoryId(ProductCategory productCategoryId) {
-//		this.productCategoryId = productCategoryId;
-//	}
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(categoryId, description, id, name, price, productImageUrl);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductEntity other = (ProductEntity) obj;
+		return Objects.equals(categoryId, other.categoryId) && Objects.equals(description, other.description)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+				&& Objects.equals(productImageUrl, other.productImageUrl);
+	}
+
+	public ProductEntity(Long id, String name, String description, double price, Long categoryId,
+			String productImageUrl) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.categoryId = categoryId;
+		this.productImageUrl = productImageUrl;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductEntity [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price
+				+ ", categoryId=" + categoryId + ", productImageUrl=" + productImageUrl + "]";
+	}
 
 	
 }

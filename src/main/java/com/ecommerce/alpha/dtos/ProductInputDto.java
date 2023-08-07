@@ -12,6 +12,8 @@ public class ProductInputDto implements Serializable{
 	private String description;
 	
 	private double price;
+	
+	private String productImageUrl;
 
 	public String getName() {
 		return name;
@@ -37,9 +39,17 @@ public class ProductInputDto implements Serializable{
 		this.price = price;
 	}
 
+	public String getProductImageUrl() {
+		return productImageUrl;
+	}
+
+	public void setProductImageUrl(String productImageUrl) {
+		this.productImageUrl = productImageUrl;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, name, price);
+		return Objects.hash(description, name, price, productImageUrl);
 	}
 
 	@Override
@@ -52,19 +62,22 @@ public class ProductInputDto implements Serializable{
 			return false;
 		ProductInputDto other = (ProductInputDto) obj;
 		return Objects.equals(description, other.description) && Objects.equals(name, other.name)
-				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price);
-	}
-
-	public ProductInputDto(String name, String description, double price) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.price = price;
+				&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price)
+				&& Objects.equals(productImageUrl, other.productImageUrl);
 	}
 
 	@Override
 	public String toString() {
-		return "ProductInputDto [name=" + name + ", description=" + description + ", price=" + price + "]";
+		return "ProductInputDto [name=" + name + ", description=" + description + ", price=" + price
+				+ ", productImageUrl=" + productImageUrl + "]";
+	}
+
+	public ProductInputDto(String name, String description, double price, String productImageUrl) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.price = price;
+		this.productImageUrl = productImageUrl;
 	}
 	
 	

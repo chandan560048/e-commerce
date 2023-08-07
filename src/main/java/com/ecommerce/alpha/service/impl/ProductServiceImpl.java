@@ -45,4 +45,13 @@ public class ProductServiceImpl implements ProductService{
 		return modelMapper.map(productRepository.saveAndFlush(productObject), ProductOutputDto.class);
 	}
 
+	@Override
+	public ProductOutputDto findProduct(String productName) {
+		ProductEntity productObj = productRepository.findByName(productName);
+		if(productObj == null) {
+			throw new NotFoundException("Product Not Found: " +productName);
+		}
+		return modelMapper.map(productObj, ProductOutputDto.class);
+	}
+
 }

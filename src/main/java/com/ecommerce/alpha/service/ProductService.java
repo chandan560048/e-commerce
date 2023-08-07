@@ -13,4 +13,6 @@ public interface ProductService {
 	
 	ProductOutputDto addProducts(ProductInputDto product, String categoryName);
 
+	ProductOutputDto findProduct(String productName);
+
 }
